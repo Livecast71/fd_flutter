@@ -1,16 +1,227 @@
-# fd_podcast
+# FD Podcast
 
-A new Flutter project.
+A modern Flutter podcast application for listening to and managing podcast episodes. Built with Flutter, this app provides a seamless experience for discovering, playing, downloading, and organizing your favorite podcast content.
 
-## Getting Started
+## 📱 Features
 
-This project is a starting point for a Flutter application.
+- **Podcast Discovery**: Browse and explore podcasts from RSS feeds
+- **Audio Playback**: High-quality audio playback with background support
+- **Download Management**: Download episodes for offline listening
+- **Favorites**: Save your favorite episodes for quick access
+- **Follow Series**: Follow podcast series to stay updated
+- **Search**: Search through episodes and content
+- **Modern UI**: Clean and intuitive Material Design interface
+- **Multi-platform**: Supports iOS, Android, Web, macOS, Linux, and Windows
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Getting Started
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Prerequisites
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter SDK (3.10.0 or higher)
+- Dart SDK (3.10.0 or higher)
+- iOS: Xcode 13.0+ (for iOS development)
+- Android: Android Studio with Android SDK (for Android development)
+- CocoaPods 1.16.2+ (for iOS dependencies)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Livecast71/fd_flutter.git
+   cd fd_flutter
+   ```
+
+2. **Install dependencies**
+   ```bash
+   flutter pub get
+   ```
+
+3. **Install iOS dependencies** (iOS only)
+   ```bash
+   cd ios
+   pod install
+   cd ..
+   ```
+
+4. **Run the app**
+   ```bash
+   flutter run
+   ```
+
+## 📦 Dependencies
+
+### Core Dependencies
+- `flutter` - Flutter SDK
+- `http` (^1.2.0) - HTTP client for fetching RSS feeds
+- `xml` (^6.4.2) - XML parsing for RSS feeds
+- `intl` (^0.19.0) - Internationalization and date formatting
+- `shared_preferences` (^2.2.2) - Local data persistence
+
+### Audio & Media
+- `just_audio` (^0.9.36) - Audio playback functionality
+- `audio_service` (^0.18.11) - Background audio service
+- `path_provider` (^2.1.1) - File system paths for downloads
+
+### Permissions
+- `permission_handler` (^11.3.0) - Handle device permissions
+
+## 🏗️ Project Structure
+
+```
+lib/
+├── main.dart                 # App entry point
+├── models/                   # Data models
+│   ├── episode.dart         # Episode model
+│   ├── podcast.dart         # Podcast model
+│   ├── program.dart         # Program model
+│   └── series.dart          # Series model
+├── screens/                  # App screens
+│   ├── home_screen.dart     # Home screen
+│   ├── main_tab_screen.dart # Main tab navigation
+│   ├── downloads_screen.dart
+│   ├── favorites_screen.dart
+│   ├── followed_screen.dart
+│   ├── programs_screen.dart
+│   ├── series_screen.dart
+│   └── episode_detail_screen.dart
+├── services/                 # Business logic services
+│   ├── rss_service.dart     # RSS feed parsing
+│   ├── audio_player_service.dart
+│   ├── download_service.dart
+│   ├── favorites_service.dart
+│   └── followed_service.dart
+├── widgets/                  # Reusable widgets
+│   ├── audio_player_widget.dart
+│   ├── mini_player_widget.dart
+│   ├── episode_card.dart
+│   ├── series_card.dart
+│   └── ...
+└── theme/                    # App theming
+    └── app_theme.dart
+```
+
+## 🔧 Building
+
+### iOS
+
+1. **Install CocoaPods dependencies**
+   ```bash
+   cd ios
+   pod install
+   cd ..
+   ```
+
+2. **Build for iOS**
+   ```bash
+   flutter build ios
+   ```
+
+   Or open `ios/Runner.xcworkspace` in Xcode and build from there.
+
+### Android
+
+1. **Build for Android**
+   ```bash
+   flutter build apk
+   ```
+
+   Or open the project in Android Studio and build from there.
+
+### Web
+
+```bash
+flutter build web
+```
+
+## 📱 Platform Requirements
+
+- **iOS**: Minimum deployment target iOS 12.0 (configured for iOS 13.0)
+- **Android**: Minimum SDK version 21 (Android 5.0)
+- **Flutter**: 3.10.0+
+
+## 🎨 Features in Detail
+
+### Audio Playback
+- Background audio playback
+- Lock screen controls
+- Audio session management
+- Playback controls (play, pause, seek, volume)
+
+### Downloads
+- Download episodes for offline listening
+- Manage downloaded content
+- Storage management
+
+### Organization
+- Organize podcasts by programs and series
+- Follow series for updates
+- Mark episodes as favorites
+- Search functionality
+
+## 🛠️ Development
+
+### Running in Debug Mode
+```bash
+flutter run
+```
+
+### Running in Release Mode
+```bash
+flutter run --release
+```
+
+### Running on Specific Device
+```bash
+flutter devices                    # List available devices
+flutter run -d <device-id>        # Run on specific device
+```
+
+### Code Analysis
+```bash
+flutter analyze
+```
+
+### Running Tests
+```bash
+flutter test
+```
+
+## 📝 Configuration
+
+### RSS Feed
+The RSS feed URL can be configured in `lib/services/rss_service.dart`:
+```dart
+static const String rssUrl = 'YOUR_RSS_FEED_URL';
+```
+
+### App Theme
+Customize the app theme in `lib/theme/app_theme.dart`.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is private and not published to pub.dev.
+
+## 👤 Author
+
+**Livecast71**
+- GitHub: [@Livecast71](https://github.com/Livecast71)
+
+## 🙏 Acknowledgments
+
+- Built with [Flutter](https://flutter.dev/)
+- Audio playback powered by [just_audio](https://pub.dev/packages/just_audio)
+- RSS parsing with [xml](https://pub.dev/packages/xml)
+
+---
+
+**Note**: This project requires Flutter 3.10.0+ and Dart 3.10.0+. Make sure you have the latest stable version of Flutter installed before running the project.
