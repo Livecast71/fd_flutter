@@ -3,7 +3,9 @@ import '../models/program.dart';
 import '../models/episode.dart';
 import '../services/rss_service.dart';
 import '../services/dagkoers_alert_service.dart';
+import '../services/followed_alert_service.dart';
 import '../widgets/dagkoers_alert_dialog.dart';
+import '../widgets/new_episode_alert_dialog.dart';
 import 'main_tab_screen.dart';
 import 'episode_detail_screen.dart';
 
@@ -16,7 +18,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final RssService _rssService = RssService();
-  final DagkoersAlertService _alertService = DagkoersAlertService();
+  final DagkoersAlertService _dagkoersAlertService = DagkoersAlertService();
+  final FollowedAlertService _followedAlertService = FollowedAlertService();
   Program? _program;
   bool _isLoading = true;
   String? _error;
@@ -41,8 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
         _isLoading = false;
       });
       
-      // Check for new FD Dagkoers episode after loading
-      _checkForDagkoersAlert(program);
+      // Check for alerts after loading (Dagkoers first, then followed podcasts)
+      _checkForAlerts(program);
     } catch (e) {
       setState(() {
         _error = e.toString();
@@ -110,25 +113,41 @@ class _HomeScreenState extends State<HomeScreen> {
     return MainTabScreen(program: _program!);
   }
 
-  Future<void> _checkForDagkoersAlert(Program program) async {
+  Future<void> _checkForAlerts(Program program) async {
     // Wait for the widget tree to be built before showing the dialog
     await Future.delayed(const Duration(milliseconds: 500));
     
     if (!mounted) return;
     
-    final episode = await _alertService.checkForNewDagkoersEpisode(program);
+    // Check for FD Dagkoers alert first (priority)
+    final dagkoersEpisode = await _dagkoersAlertService.checkForNewDagkoersEpisode(program);
     
-    if (episode != null && mounted) {
+    if (dagkoersEpisode != null && mounted) {
       // Mark as alerted before showing dialog
-      await _alertService.markEpisodeAsAlerted(episode);
+      await _dagkoersAlertService.markEpisodeAsAlerted(dagkoersEpisode);
       
-      // Show alert dialog
-      _showDagkoersAlert(episode);
+      // Show alert dialog and wait for it to be dismissed
+      await _showDagkoersAlert(dagkoersEpisode);
+    }
+    
+    // After Dagkoers alert (or if none), check for followed podcast alerts
+    if (!mounted) return;
+    
+    final newFollowedEpisodes = await _followedAlertService.checkForNewFollowedEpisodes(program);
+    
+    if (newFollowedEpisodes.isNotEmpty && mounted) {
+      // Show alerts for each new followed episode sequentially
+      for (final episode in newFollowedEpisodes) {
+        if (!mounted) break;
+        
+        // Show alert and wait for user action
+        await _showFollowedAlert(episode);
+      }
     }
   }
 
-  void _showDagkoersAlert(Episode episode) {
-    showDialog(
+  Future<void> _showDagkoersAlert(Episode episode) async {
+    await showDialog(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
@@ -149,6 +168,41 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           onDismiss: () {
             Navigator.of(context).pop(); // Close dialog
+          },
+        );
+      },
+    );
+  }
+
+  Future<void> _showFollowedAlert(Episode episode) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return NewEpisodeAlertDialog(
+          episode: episode,
+          seriesName: episode.seriesName,
+          onViewEpisode: () async {
+            Navigator.of(context).pop(); // Close dialog
+            // Mark episode as seen when user views it
+            await _followedAlertService.markEpisodeAsSeen(episode.seriesName, episode);
+            // Navigate to episode detail screen
+            if (mounted) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EpisodeDetailScreen(
+                    episode: episode,
+                    podcastTitle: episode.seriesName,
+                  ),
+                ),
+              );
+            }
+          },
+          onDismiss: () async {
+            Navigator.of(context).pop(); // Close dialog
+            // Mark episode as seen even if dismissed (so we don't alert again)
+            await _followedAlertService.markEpisodeAsSeen(episode.seriesName, episode);
           },
         );
       },
