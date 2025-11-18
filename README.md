@@ -9,6 +9,9 @@ A modern Flutter podcast application for listening to and managing podcast episo
 - **Download Management**: Download episodes for offline listening
 - **Favorites**: Save your favorite episodes for quick access
 - **Follow Series**: Follow podcast series to stay updated
+- **Smart Alerts**: Get notified about new episodes automatically
+  - **FD Dagkoers Alerts**: Automatic alerts for FD Dagkoers episodes published before 16:00
+  - **Followed Podcast Alerts**: Notifications for new episodes in your followed series
 - **Search**: Search through episodes and content
 - **Modern UI**: Clean and intuitive Material Design interface
 - **Multi-platform**: Supports iOS, Android, Web, macOS, Linux, and Windows
@@ -89,12 +92,16 @@ lib/
 │   ├── audio_player_service.dart
 │   ├── download_service.dart
 │   ├── favorites_service.dart
-│   └── followed_service.dart
+│   ├── followed_service.dart
+│   ├── dagkoers_alert_service.dart  # FD Dagkoers alert functionality
+│   └── followed_alert_service.dart  # Followed podcast alert functionality
 ├── widgets/                  # Reusable widgets
 │   ├── audio_player_widget.dart
 │   ├── mini_player_widget.dart
 │   ├── episode_card.dart
 │   ├── series_card.dart
+│   ├── dagkoers_alert_dialog.dart      # FD Dagkoers alert dialog
+│   ├── new_episode_alert_dialog.dart  # Followed podcast alert dialog
 │   └── ...
 └── theme/                    # App theming
     └── app_theme.dart
@@ -157,6 +164,34 @@ flutter build web
 - Follow series for updates
 - Mark episodes as favorites
 - Search functionality
+
+### Smart Alerts
+
+The app includes intelligent alert functionality to keep you informed about new podcast episodes:
+
+#### FD Dagkoers Alerts
+- **Automatic Detection**: The app automatically checks for new FD Dagkoers episodes published before 16:00 (4:00 PM)
+- **Date & Time Validation**: Only alerts for episodes published on the current day before the cutoff time
+- **One-Time Alerts**: Each episode is only alerted once to avoid duplicate notifications
+- **Direct Navigation**: Tap the alert to go directly to the episode detail screen
+
+#### Followed Podcast Alerts
+- **Track New Episodes**: Automatically tracks which episodes you've seen for each followed series
+- **Smart Detection**: Compares the latest episode with your last seen episode to detect new content
+- **Multiple Alerts**: Shows alerts for all followed series with new episodes (shown sequentially)
+- **Seen Tracking**: Episodes are marked as seen when you view them or dismiss the alert
+- **First-Time Handling**: When you first follow a series, the latest episode is automatically marked as seen (no initial alert)
+
+#### How Alerts Work
+1. **On App Launch**: The app checks for new episodes when you open it
+2. **Priority System**: FD Dagkoers alerts are shown first (if available), followed by followed podcast alerts
+3. **Sequential Display**: Multiple alerts are shown one at a time to avoid overwhelming the user
+4. **Persistent Tracking**: Your viewing history is stored locally using SharedPreferences
+5. **Smart Navigation**: Tap "Bekijk aflevering" to go directly to the episode, or "Later" to dismiss
+
+#### Alert Services
+- **DagkoersAlertService**: Handles FD Dagkoers-specific alert logic and tracking
+- **FollowedAlertService**: Manages episode tracking for followed series and detects new episodes
 
 ## 🛠️ Development
 
