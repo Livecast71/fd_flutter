@@ -10,7 +10,9 @@ import 'main_tab_screen.dart';
 import 'episode_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final VoidCallback? onThemeChanged;
+  
+  const HomeScreen({super.key, this.onThemeChanged});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -110,7 +112,10 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
 
-    return MainTabScreen(program: _program!);
+    return MainTabScreen(
+      program: _program!,
+      onThemeChanged: widget.onThemeChanged,
+    );
   }
 
   Future<void> _checkForAlerts(Program program) async {

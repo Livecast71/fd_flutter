@@ -7,14 +7,17 @@ import 'favorites_screen.dart';
 import 'followed_screen.dart';
 import 'downloads_screen.dart';
 import 'episode_detail_screen.dart';
+import 'settings_screen.dart';
 import '../services/audio_player_service.dart';
 
 class MainTabScreen extends StatefulWidget {
   final Program program;
+  final VoidCallback? onThemeChanged;
 
   const MainTabScreen({
     super.key,
     required this.program,
+    this.onThemeChanged,
   });
 
   @override
@@ -59,6 +62,24 @@ class _MainTabScreenState extends State<MainTabScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('FD Podcast'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingsScreen(
+                    onThemeChanged: widget.onThemeChanged,
+                  ),
+                ),
+              );
+              // Refresh theme if changed
+              widget.onThemeChanged?.call();
+            },
+            tooltip: 'Instellingen',
+          ),
+        ],
       ),
       body: _screens[_currentIndex],
       bottomNavigationBar: Column(
