@@ -18,7 +18,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   
   AppThemeMode _currentThemeMode = AppThemeMode.system;
   DownloadQuality _currentQuality = DownloadQuality.medium;
-  String _appVersion = 'Loading...';
+  String _appVersion = 'Laden...';
   bool _isLoading = true;
 
   @override

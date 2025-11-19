@@ -101,7 +101,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error playing audio: $e'),
+            content: Text('Fout bij afspelen audio: $e'),
             backgroundColor: Colors.red,
           ),
         );
@@ -210,7 +210,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                   ),
                 ),
                 onPressed: _changeSpeed,
-                tooltip: 'Playback speed',
+                tooltip: 'Afspeelsnelheid',
               ),
               const SizedBox(width: 8),
               // Rewind 10 seconds

@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Icon(Icons.error_outline, size: 64, color: Colors.red),
               const SizedBox(height: 16),
               Text(
-                'Error loading podcast',
+                'Fout bij laden podcast',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 8),
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: _loadPodcast,
-                child: const Text('Retry'),
+                child: const Text('Opnieuw proberen'),
               ),
             ],
           ),
@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: const Text('FD Podcast'),
         ),
         body: const Center(
-          child: Text('No podcast data available'),
+          child: Text('Geen podcast gegevens beschikbaar'),
         ),
       );
     }

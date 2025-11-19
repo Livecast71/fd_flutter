@@ -1,9 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum DownloadQuality {
-  high(128, 'Hoog (128 kbps)', 'Best quality, larger file size'),
-  medium(98, 'Gemiddeld (98 kbps)', 'Good balance of quality and size'),
-  low(64, 'Laag (64 kbps)', 'Smaller file size, lower quality');
+  high(128, 'Hoog (128 kbps)', 'Beste kwaliteit, groter bestand'),
+  medium(98, 'Gemiddeld (98 kbps)', 'Goede balans tussen kwaliteit en grootte'),
+  low(64, 'Laag (64 kbps)', 'Kleiner bestand, lagere kwaliteit');
 
   final int bitrate;
   final String displayName;

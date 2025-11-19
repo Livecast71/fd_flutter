@@ -60,7 +60,7 @@ class _EpisodeDetailScreenState extends State<EpisodeDetailScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Episode'),
+        title: const Text('Aflevering'),
       ),
       body: SingleChildScrollView(
         child: Column(
