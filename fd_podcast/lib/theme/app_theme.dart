@@ -1,33 +1,72 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // FD Brand Colors (based on RSS feed and website)
-  static const Color primaryColor = Color(0xFF1a1a1a); // Dark text
-  static const Color secondaryColor = Color(0xFFffeadb); // Cream/beige background
-  static const Color accentColor = Color(0xFFcdbeb4); // Muted brown
-  static const Color cardBackground = Color(0xFFFFFFFF);
-  static const Color dividerColor = Color(0xFFE5E5E5);
-  static const Color textSecondary = Color(0xFF66767d);
+  // FD Design System Colors & Typography (from https://design-system.fd.nl/tokens)
+  
+  // Font Families
+  static const String fontFamilyRegular = 'ProximaNovaRegular';
+  static const String fontFamilyBold = 'ProximaNovaBold';
+  static const String fontFamilySerifRegular = 'ArnhemProBlond';
+  static const String fontFamilySerifBold = 'ArnhemProBold';
+  
+  // Base font size (1rem = 16px)
+  static const double baseFontSize = 16.0;
+  
+  // Primary Colors
+  static const Color primary100 = Color(0xFF0B646B); // Primary 100
+  static const Color primary75 = Color(0xFF379596);  // Primary 75
+  static const Color primary50 = Color(0xFF41AFB0);  // Primary 50
+  static const Color primary25 = Color(0xFFB0C6C1);  // Primary 25
+  
+  // Secondary Colors
+  static const Color secondary100 = Color(0xFFE66C10); // Secondary 100
+  static const Color secondary75 = Color(0xFFF27211);  // Secondary 75
+  static const Color secondary50 = Color(0xFFFF7812);  // Secondary 50
+  static const Color secondary25 = Color(0xFFFF9A4E);  // Secondary 25
+  
+  // Neutral Colors
+  static const Color neutral0 = Color(0xFF000000);     // Black
+  static const Color neutral10 = Color(0xFF191919);   // Dark text
+  static const Color neutral20 = Color(0xFF332F2C);
+  static const Color neutral30 = Color(0xFF4C4642);
+  static const Color neutral40 = Color(0xFF73655F);
+  static const Color neutral50 = Color(0xFFA6988F);
+  static const Color neutral60 = Color(0xFFCDBEB4);   // Muted brown/accent
+  static const Color neutral70 = Color(0xFFE5D1C6);
+  static const Color neutral80 = Color(0xFFF1DED2);
+  static const Color neutral90 = Color(0xFFFFEADB);   // Cream/beige background
+  static const Color neutral100 = Color(0xFFFFFFFF);  // White
+  
+  // Legacy aliases for compatibility
+  static const Color primaryColor = neutral10;        // Dark text
+  static const Color secondaryColor = neutral90;     // Cream/beige background
+  static const Color accentColor = neutral60;        // Muted brown
+  static const Color cardBackground = neutral100;    // White
+  static const Color dividerColor = neutral70;       // Light divider
+  static const Color textSecondary = neutral40;      // Secondary text
 
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: primaryColor,
-        primary: primaryColor,
-        secondary: accentColor,
+        seedColor: primary100,
+        primary: primary100,
+        secondary: secondary100,
         surface: cardBackground,
+        onPrimary: neutral100,
+        onSecondary: neutral100,
+        onSurface: neutral10,
       ),
       scaffoldBackgroundColor: secondaryColor,
       appBarTheme: const AppBarTheme(
-        backgroundColor: primaryColor,
-        foregroundColor: Colors.white,
+        backgroundColor: primary100,
+        foregroundColor: neutral100,
         elevation: 0,
         centerTitle: true,
         titleTextStyle: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: neutral100,
         ),
       ),
       cardTheme: CardThemeData(
@@ -38,42 +77,67 @@ class AppTheme {
         ),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
-      textTheme: const TextTheme(
+      textTheme: TextTheme(
+        // Headings - using ProximaNovaBold, line-height 1.2
+        // Heading M (1.44rem = 23.04px)
         headlineLarge: TextStyle(
-          fontSize: 24,
+          fontSize: baseFontSize * 1.44, // 1.44rem
           fontWeight: FontWeight.bold,
-          color: primaryColor,
+          fontFamily: fontFamilyBold,
+          height: 1.2,
+          color: neutral10,
         ),
+        // Heading S (1.2rem = 19.2px)
         headlineMedium: TextStyle(
-          fontSize: 20,
+          fontSize: baseFontSize * 1.2, // 1.2rem
           fontWeight: FontWeight.bold,
-          color: primaryColor,
+          fontFamily: fontFamilyBold,
+          height: 1.2,
+          color: neutral10,
         ),
+        // Heading XS (1rem = 16px)
         titleLarge: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: primaryColor,
+          fontSize: baseFontSize * 1.0, // 1rem
+          fontWeight: FontWeight.bold,
+          fontFamily: fontFamilyBold,
+          height: 1.2,
+          color: neutral10,
         ),
+        // Body M (1.2rem = 19.2px)
         titleMedium: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: primaryColor,
+          fontSize: baseFontSize * 1.2, // 1.2rem
+          fontWeight: FontWeight.normal,
+          fontFamily: fontFamilyRegular,
+          height: 1.4,
+          color: neutral10,
         ),
+        // Body M (1.2rem = 19.2px)
         bodyLarge: TextStyle(
-          fontSize: 16,
-          color: primaryColor,
+          fontSize: baseFontSize * 1.2, // 1.2rem
+          fontWeight: FontWeight.normal,
+          fontFamily: fontFamilyRegular,
+          height: 1.4,
+          color: neutral10,
         ),
+        // Body S (1rem = 16px)
         bodyMedium: TextStyle(
-          fontSize: 14,
-          color: primaryColor,
+          fontSize: baseFontSize * 1.0, // 1rem
+          fontWeight: FontWeight.normal,
+          fontFamily: fontFamilyRegular,
+          height: 1.4,
+          color: neutral10,
         ),
+        // Body XS (0.875rem = 14px)
         bodySmall: TextStyle(
-          fontSize: 12,
-          color: textSecondary,
+          fontSize: baseFontSize * 0.875, // 0.875rem
+          fontWeight: FontWeight.normal,
+          fontFamily: fontFamilyRegular,
+          height: 1.4,
+          color: neutral40,
         ),
       ),
       dividerTheme: const DividerThemeData(
-        color: dividerColor,
+        color: neutral70,
         thickness: 1,
         space: 1,
       ),
@@ -85,67 +149,88 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.dark,
       colorScheme: ColorScheme.dark(
-        primary: const Color(0xFFffeadb), // Light accent for dark mode
-        secondary: accentColor,
-        surface: const Color(0xFF2a2a2a),
-        background: const Color(0xFF1a1a1a),
+        primary: primary50,              // Use primary 50 for dark mode
+        secondary: secondary50,          // Use secondary 50 for dark mode
+        surface: neutral20,              // Use neutral 20 for cards/surface
+        background: neutral10,           // Use neutral 10 for background
+        onPrimary: neutral100,
+        onSecondary: neutral100,
+        onSurface: neutral90,
       ),
-      scaffoldBackgroundColor: const Color(0xFF1a1a1a),
+      scaffoldBackgroundColor: neutral10,
       appBarTheme: const AppBarTheme(
-        backgroundColor: Color(0xFF2a2a2a),
-        foregroundColor: Colors.white,
+        backgroundColor: neutral20,
+        foregroundColor: neutral90,
         elevation: 0,
         centerTitle: true,
         titleTextStyle: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: neutral90,
         ),
       ),
       cardTheme: CardThemeData(
-        color: const Color(0xFF2a2a2a),
+        color: neutral20,
         elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
-      textTheme: const TextTheme(
+      textTheme: TextTheme(
+        // Headings - using ProximaNovaBold, line-height 1.2
         headlineLarge: TextStyle(
-          fontSize: 24,
+          fontSize: baseFontSize * 1.44, // 1.44rem
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          fontFamily: fontFamilyBold,
+          height: 1.2,
+          color: neutral90,
         ),
         headlineMedium: TextStyle(
-          fontSize: 20,
+          fontSize: baseFontSize * 1.2, // 1.2rem
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          fontFamily: fontFamilyBold,
+          height: 1.2,
+          color: neutral90,
         ),
         titleLarge: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
+          fontSize: baseFontSize * 1.0, // 1rem
+          fontWeight: FontWeight.bold,
+          fontFamily: fontFamilyBold,
+          height: 1.2,
+          color: neutral90,
         ),
         titleMedium: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
+          fontSize: baseFontSize * 1.2, // 1.2rem
+          fontWeight: FontWeight.normal,
+          fontFamily: fontFamilyRegular,
+          height: 1.4,
+          color: neutral90,
         ),
         bodyLarge: TextStyle(
-          fontSize: 16,
-          color: Colors.white,
+          fontSize: baseFontSize * 1.2, // 1.2rem
+          fontWeight: FontWeight.normal,
+          fontFamily: fontFamilyRegular,
+          height: 1.4,
+          color: neutral90,
         ),
         bodyMedium: TextStyle(
-          fontSize: 14,
-          color: Colors.white70,
+          fontSize: baseFontSize * 1.0, // 1rem
+          fontWeight: FontWeight.normal,
+          fontFamily: fontFamilyRegular,
+          height: 1.4,
+          color: neutral70,
         ),
         bodySmall: TextStyle(
-          fontSize: 12,
-          color: Colors.white60,
+          fontSize: baseFontSize * 0.875, // 0.875rem
+          fontWeight: FontWeight.normal,
+          fontFamily: fontFamilyRegular,
+          height: 1.4,
+          color: neutral60,
         ),
       ),
       dividerTheme: const DividerThemeData(
-        color: Color(0xFF404040),
+        color: neutral30,
         thickness: 1,
         space: 1,
       ),

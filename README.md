@@ -2,6 +2,54 @@
 
 A modern Flutter podcast application for listening to and managing podcast episodes. Built with Flutter, this app provides a seamless experience for discovering, playing, downloading, and organizing your favorite podcast content.
 
+## 📸 Screenshots
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="screenshots/home-screen.png" alt="Home Screen" width="300"/>
+        <br />
+        <sub><b>Home Screen</b></sub>
+      </td>
+      <td align="center">
+        <img src="screenshots/podcasts-screen.png" alt="Podcasts Screen" width="300"/>
+        <br />
+        <sub><b>Podcasts Screen</b></sub>
+      </td>
+      <td align="center">
+        <img src="screenshots/episode-detail.png" alt="Episode Detail" width="300"/>
+        <br />
+        <sub><b>Episode Detail</b></sub>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="screenshots/favorites-screen.png" alt="Favorites Screen" width="300"/>
+        <br />
+        <sub><b>Favorites Screen</b></sub>
+      </td>
+      <td align="center">
+        <img src="screenshots/followed-screen.png" alt="Followed Screen" width="300"/>
+        <br />
+        <sub><b>Followed Screen</b></sub>
+      </td>
+      <td align="center">
+        <img src="screenshots/downloads-screen.png" alt="Downloads Screen" width="300"/>
+        <br />
+        <sub><b>Downloads Screen</b></sub>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" colspan="3">
+        <img src="screenshots/settings-screen.png" alt="Settings Screen" width="300"/>
+        <br />
+        <sub><b>Settings Screen</b></sub>
+      </td>
+    </tr>
+  </table>
+</div>
+
 ## 📱 Features
 
 - **Podcast Discovery**: Browse and explore podcasts from RSS feeds

@@ -112,7 +112,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.library_books),
-                label: 'Programma\'s',
+                label: 'Podcast\'s',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.favorite),
