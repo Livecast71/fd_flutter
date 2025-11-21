@@ -373,7 +373,7 @@ Een moderne Flutter podcast applicatie voor het beluisteren en beheren van podca
 
 ## 📱 Functies
 
-- **Podcast Ontdekking**: Blader en verken podcasts vanuit RSS feeds
+- **Podcast Ontdekking**: Blader en ontdekken van podcasts vanuit RSS feeds
 - **Audio Afspelen**: Hoge kwaliteit audio afspelen met achtergrond ondersteuning
 - **Download Beheer**: Download afleveringen voor offline luisteren
 - **Favorieten**: Bewaar je favoriete afleveringen voor snelle toegang
